@@ -14,36 +14,28 @@ describe('King', () => {
     it('can move to adjacent squares', () => {
         const king = new King(Player.WHITE);
         board.setPiece(Square.at(3, 4), king);
-
         const moves = king.getAvailableMoves(board);
-        console.log(moves)
         const expectedMoves = [
             Square.at(2, 3), Square.at(2, 4), Square.at(2, 5), Square.at(3, 5),
             Square.at(4, 5), Square.at(4, 4), Square.at(4, 3), Square.at(3, 3)
         ];
-
         moves.should.deep.include.members(expectedMoves);
     });
 
     it('cannot move off the board', () => {
         const king = new King(Player.WHITE);
         board.setPiece(Square.at(7, 7), king);
-
         const moves = king.getAvailableMoves(board);
-        console.log(moves)
         const expectedMoves = [
             Square.at(6, 7), Square.at(6, 6), Square.at(7, 6), 
         ];
-
         moves.should.deep.include.members(expectedMoves);
     });
 
     it('cannot make any other moves', () => {
         const king = new King(Player.WHITE);
         board.setPiece(Square.at(3, 4), king);
-
         const moves = king.getAvailableMoves(board);
-
         moves.should.have.length(8);
     });
 });

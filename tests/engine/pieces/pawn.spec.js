@@ -82,25 +82,37 @@ describe('Pawn', () => {
         });
     });
 
-    it('cannot move if there is a piece in front', () => {
-        const pawn = new Pawn(Player.BLACK);
-        const blockingPiece = new Rook(Player.WHITE);
-        board.setPiece(Square.at(6, 3), pawn);
-        board.setPiece(Square.at(5, 3), blockingPiece);
+    it('can take opposing pieces', () => {
+        const pawn = new Pawn(Player.WHITE);
+        const opposingPiece = new Rook(Player.BLACK);
+        board.setPiece(Square.at(5, 6), pawn);
+        board.setPiece(Square.at(6, 6), opposingPiece);
+
         const moves = pawn.getAvailableMoves(board);
 
-        moves.should.be.empty;
+        moves.should.deep.include(Square.at(6, 6));
     });
 
-    it('cannot move two squares if there is a piece two squares in front', () => {
-        const pawn = new Pawn(Player.BLACK);
-        const blockingPiece = new Rook(Player.WHITE);
-        board.setPiece(Square.at(6, 3), pawn);
-        board.setPiece(Square.at(4, 3), blockingPiece);
+    it('cannot take the opposing king', () => {
+        const pawn = new Pawn(Player.WHITE);
+        const opposingKing = new King(Player.BLACK);
+        board.setPiece(Square.at(5, 6), pawn);
+        board.setPiece(Square.at(6, 6), opposingKing);
 
         const moves = pawn.getAvailableMoves(board);
 
-        moves.should.not.deep.include(Square.at(4, 3));
+        moves.should.not.deep.include(Square.at(6, 6));
+    });
+
+    it('cannot take friendly pieces', () => {
+        const pawn = new Pawn(Player.WHITE);
+        const friendlyPiece = new Rook(Player.WHITE);
+        board.setPiece(Square.at(5, 6), pawn);
+        board.setPiece(Square.at(6, 6), friendlyPiece);
+
+        const moves = pawn.getAvailableMoves(board);
+
+        moves.should.not.deep.include(Square.at(6, 6));
     });
 
 });
