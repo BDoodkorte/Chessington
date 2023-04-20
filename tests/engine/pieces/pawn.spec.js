@@ -93,6 +93,17 @@ describe('Pawn', () => {
         moves.should.deep.include(Square.at(6, 6));
     });
 
+    it('can take opposing pieces diagonally', () => {
+        const pawn = new Pawn(Player.WHITE);
+        const opposingPiece = new Rook(Player.BLACK);
+        board.setPiece(Square.at(4, 5), pawn);
+        board.setPiece(Square.at(5, 6), opposingPiece);
+
+        const moves = pawn.getAvailableMoves(board);
+
+        moves.should.deep.include(Square.at(5, 6));
+    });
+
     it('cannot take the opposing king', () => {
         const pawn = new Pawn(Player.WHITE);
         const opposingKing = new King(Player.BLACK);

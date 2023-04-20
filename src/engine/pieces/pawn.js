@@ -17,10 +17,10 @@ export default class Pawn extends Piece {
                     && board.getPiece(Square.at(location.row + 1, location.col)) === undefined) {
                     moves.push(Square.at(location.row + 2, location.col))
                 }
-                else if (board.getPiece(Square.at(location.row + 2, location.col)).player === Player.BLACK 
-                && board.getPiece(Square.at(location.row + 1, location.col)) === Player.BLACK
-                && board.getPiece(Square.at(location.row + 2, location.col)) instanceof King === false 
-                && board.getPiece(Square.at(location.row + 1, location.col)) instanceof King === false) {
+                else if (board.getPiece(Square.at(location.row + 2, location.col)).player === Player.BLACK
+                    || board.getPiece(Square.at(location.row + 1, location.col)) === Player.BLACK
+                    && board.getPiece(Square.at(location.row + 2, location.col)) instanceof King === false
+                    && board.getPiece(Square.at(location.row + 1, location.col)) instanceof King === false) {
                     moves.push(Square.at(location.row + 2, location.col))
                 }
             }
@@ -28,10 +28,18 @@ export default class Pawn extends Piece {
                 if (board.getPiece(Square.at(location.row + 1, location.col)) === undefined) {
                     moves.push(Square.at(location.row + 1, location.col))
                 }
-                else if (board.getPiece(Square.at(location.row + 1, location.col)).player === Player.BLACK 
-                && board.getPiece(Square.at(location.row + 1, location.col)) instanceof King === false 
+                else if (board.getPiece(Square.at(location.row + 1, location.col)).player === Player.BLACK
+                    && board.getPiece(Square.at(location.row + 1, location.col)) instanceof King === false
                 ) {
                     moves.push(Square.at(location.row + 1, location.col))
+                }
+                if (board.getPiece(Square.at(location.row + 1, location.col + 1)) &&
+                    board.getPiece(Square.at(location.row + 1, location.col + 1)).player === Player.BLACK) {
+                    moves.push(Square.at(location.row + 1, location.col + 1))
+                }
+                else if (board.getPiece(Square.at(location.row + 1, location.col - 1)) &&
+                    board.getPiece(Square.at(location.row + 1, location.col - 1)).player === Player.BLACK) {
+                    moves.push(Square.at(location.row + 1, location.col - 1))
                 }
             }
 
@@ -40,10 +48,10 @@ export default class Pawn extends Piece {
                 if (board.getPiece(Square.at(location.row - 2, location.col)) === undefined && board.getPiece(Square.at(location.row - 1, location.col)) === undefined) {
                     moves.push(Square.at(location.row - 2, location.col))
                 }
-                else if (board.getPiece(Square.at(location.row - 2, location.col)).player === Player.WHITE 
-                && board.getPiece(Square.at(location.row - 1, location.col)) === Player.WHITE
-                && board.getPiece(Square.at(location.row - 2, location.col)) instanceof King === false 
-                && board.getPiece(Square.at(location.row - 1, location.col)) instanceof King === false) {
+                else if (board.getPiece(Square.at(location.row - 2, location.col)).player === Player.WHITE
+                    || board.getPiece(Square.at(location.row - 1, location.col)) === Player.WHITE
+                    && board.getPiece(Square.at(location.row - 2, location.col)) instanceof King === false
+                    && board.getPiece(Square.at(location.row - 1, location.col)) instanceof King === false) {
                     moves.push(Square.at(location.row - 2, location.col))
                 }
             }
@@ -51,10 +59,19 @@ export default class Pawn extends Piece {
                 if (board.getPiece(Square.at(location.row - 1, location.col)) === undefined) {
                     moves.push(Square.at(location.row - 1, location.col))
                 }
-                else if (board.getPiece(Square.at(location.row - 1, location.col)).player === Player.WHITE 
-                && board.getPiece(Square.at(location.row - 1, location.col)) instanceof King === false 
+                else if (board.getPiece(Square.at(location.row - 1, location.col)).player === Player.WHITE
+                    && board.getPiece(Square.at(location.row - 1, location.col)) instanceof King === false
                 ) {
                     moves.push(Square.at(location.row - 1, location.col))
+                }
+
+                if (board.getPiece(Square.at(location.row - 1, location.col + 1)) &&
+                    board.getPiece(Square.at(location.row - 1, location.col + 1)).player === Player.BLACK) {
+                    moves.push(Square.at(location.row - 1, location.col + 1))
+                }
+                else if (board.getPiece(Square.at(location.row - 1, location.col - 1)) &&
+                    board.getPiece(Square.at(location.row - 1, location.col - 1)).player === Player.BLACK) {
+                    moves.push(Square.at(location.row - 1, location.col - 1))
                 }
             }
         }
